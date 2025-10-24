@@ -1,5 +1,5 @@
 {
-  "name": "wxt-svelte-starter",
+  "name": "twboarder",
   "description": "manifest.json description",
   "private": true,
   "version": "0.0.0",
@@ -15,6 +15,7 @@
     "postinstall": "wxt prepare"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.1.16",
     "@tsconfig/svelte": "^5.0.5",
     "@wxt-dev/module-svelte": "^2.0.3",
     "@wxt-dev/webextension-polyfill": "^1.0.0",
@@ -38,6 +39,7 @@
   "packageManager": "pnpm@10.19.0",
   "dependencies": {
     "@webext-core/messaging": "^2.3.0",
+    "tailwindcss": "^4.1.16",
     "webextension-polyfill": "^0.12.0"
   }
 }
