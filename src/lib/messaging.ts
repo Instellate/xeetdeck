@@ -5,6 +5,10 @@ interface ProtocolMap {
   addBoard(): void;
   openBoard(): void;
   removeBoard(): void;
+
+  // Used for constructing Twitter API Client
+  getTwitterCookies(): Record<string, string>;
+
   debug(msg: string): void;
 }
 

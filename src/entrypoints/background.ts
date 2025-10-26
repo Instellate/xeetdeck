@@ -59,5 +59,32 @@ export default defineBackground(() => {
     });
   });
 
+  onMessage('getTwitterCookies', async (m) => {
+    const cookies = await browser.cookies.getAll({ domain: 'x.com' });
+    const cookiesRecord: Record<string, string> = {};
+
+    cookies.forEach((c) => (cookiesRecord[c.name] = c.value));
+
+    const ct0 = cookies.find((c) => c.name === 'ct0');
+    if (ct0 && ct0?.sameSite !== 'no_restriction') {
+      ct0.sameSite = 'no_restriction';
+      await browser.cookies.set({
+        url: 'https://x.com' + ct0.path,
+        httpOnly: ct0.httpOnly,
+        domain: ct0.domain,
+        expirationDate: ct0.expirationDate,
+        name: ct0.name,
+        partitionKey: ct0.partitionKey,
+        path: ct0.path,
+        sameSite: 'no_restriction',
+        secure: ct0.secure,
+        storeId: ct0.storeId,
+        value: ct0.value,
+      });
+    }
+
+    return cookiesRecord;
+  });
+
   onMessage('debug', (e) => console.log(e.data));
 });

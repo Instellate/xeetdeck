@@ -1,5 +1,8 @@
 import { defineConfig } from 'wxt';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import tailwindcss from '@tailwindcss/vite';
+
+// Node polyfills are needed to get `twitter-openapi-typescript` to work
 
 export default defineConfig({
   srcDir: 'src',
@@ -10,6 +13,7 @@ export default defineConfig({
       'tabs',
       'declarativeNetRequest',
       'declarativeNetRequestWithHostAccess',
+      'cookies',
     ],
     host_permissions: [
       'https://twitter.com/*',
@@ -19,6 +23,6 @@ export default defineConfig({
     description: 'A self made implementation of tweetdeck',
   },
   vite: () => ({
-    plugins: [tailwindcss()],
+    plugins: [nodePolyfills({ globals: { Buffer: true } }), tailwindcss()],
   }),
 });

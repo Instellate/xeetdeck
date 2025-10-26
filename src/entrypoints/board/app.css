@@ -1,1 +1,21 @@
 @import 'tailwindcss';
+
+@source inline('z-20');
+@source inline('z-10');
+@source inline('z-0');
+
+@theme {
+  --color-background: var(--bg-color);
+  --color-background-hover: var(--bg-hover-color);
+}
+
+:root {
+  --bg-color: rgb(21, 32, 43);
+  --bg-hover-color: rgb(30, 39, 50);
+}
+
+html,
+body {
+  background-color: var(--bg-color);
+  color: white;
+}

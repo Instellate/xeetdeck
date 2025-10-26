@@ -4,10 +4,6 @@ function mountUi(container: HTMLElement) {
   container.style.display = 'hidden';
   const wrapper = container.parentElement!;
 
-  if (wrapper.childElementCount !== 7) {
-    return;
-  }
-
   const menuOption = wrapper.children.item(4)!.cloneNode(true) as HTMLElement;
 
   const anchor = menuOption.firstElementChild as HTMLAnchorElement;

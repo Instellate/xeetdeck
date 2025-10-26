@@ -5,7 +5,8 @@
     "trailingComma": "all",
     "printWidth": 89,
     "plugins": [
-        "prettier-plugin-svelte"
+        "prettier-plugin-svelte",
+        "prettier-plugin-tailwindcss"
     ],
     "jsxSingleQuote": false,
     "overrides": [
