@@ -1,7 +1,6 @@
-# WXT + Svelte
+# TWBoarder
+A free replacement for tweetdeck
 
-This template should help get you started developing with Svelte in WXT.
-
-## Recommended IDE Setup
-
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+This is WIP and has buttons and others with incomplete features.  
+Expect this to not work fully. This works both on Chrome and Firefox. 
+But Firefox has so far been the most stable platform for this.

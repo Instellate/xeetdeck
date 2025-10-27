@@ -1,3 +1,0 @@
-Find posts that is retweeted:
-`document.querySelector('article[data-testid="tweet"]:has(div>div>div>div>div>div>div>div>svg)').parentElement.parentElement.parentElement`
-
