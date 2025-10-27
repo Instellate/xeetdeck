@@ -8,7 +8,7 @@ function mountUi(container: HTMLElement) {
 
   const anchor = menuOption.firstElementChild as HTMLAnchorElement;
   anchor.href = browser.runtime.getURL('/board.html');
-  anchor.setAttribute('data-testid', 'twboarder');
+  anchor.setAttribute('data-testid', 'xeetdeck');
 
   const svg = anchor.firstElementChild?.firstElementChild!;
   svg.innerHTML =
@@ -17,7 +17,7 @@ function mountUi(container: HTMLElement) {
 
   const text = anchor.firstElementChild?.children.item(1)
     ?.firstElementChild! as HTMLSpanElement;
-  text.innerText = 'Open TWBoarder';
+  text.innerText = 'Open XeetDeck';
 
   menuOption.addEventListener('click', (e) => {
     if (e.ctrlKey) {

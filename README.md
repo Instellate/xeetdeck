@@ -1,4 +1,4 @@
-# TWBoarder
+# XeetDeck
 A free replacement for tweetdeck
 
 This is WIP and has buttons and others with incomplete features.  

@@ -17,7 +17,7 @@ export default defineConfig({
     description: 'A self made implementation of tweetdeck',
     browser_specific_settings: {
       gecko: {
-        id: 'twboarder@instellate.xyz',
+        id: 'xeetdeck@instellate.xyz',
       },
     },
   },
