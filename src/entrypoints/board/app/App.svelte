@@ -168,23 +168,22 @@
     >
       <Icon class="h-6 w-6 opacity-70" />
     </div>
-    <div class="flex flex-col">
+    <div class="flex flex-col justify-center">
       <strong>{text}</strong>
-      <span>&#x200B;</span>
     </div>
   </DropdownMenu.Item>
 {/snippet}
 
 {#await getLists()}
-  <div class="absolute bottom-0 left-0">
+  <div class="absolute bottom-0 left-0 pb-2 pl-2">
     <button disabled>
       <Add class="h-12 w-12" />
     </button>
   </div>
 {:then feeds}
   <DropdownMenu.Root>
-    <DropdownMenu.Trigger class="absolute bottom-0 left-0">
-      <button>
+    <DropdownMenu.Trigger class="absolute bottom-0 left-0 pb-2 pl-2">
+      <button class="hover:bg-background-hover rounded-md transition-colors delay-75">
         <Add class="h-12 w-12" />
       </button>
     </DropdownMenu.Trigger>
@@ -215,7 +214,7 @@
                   class="h-12 w-12 rounded-lg bg-cover bg-center"
                   style="background-image: url({list.iconUrl});"
                 ></div>
-                <div class="flex flex-col">
+                <div class="flex flex-col justify-center">
                   <strong>{list.name}</strong>
                   <span class="opacity-50">{list.membersContext ?? '0 members'}</span>
                 </div>
@@ -277,6 +276,7 @@
         in:fade={{ duration: 150 }}
         out:fade={{ duration: 150 }}
         style="order: {pageTab.order}"
+        class="bg-none"
       >
         <Tab
           bind:page={tabs[i]}

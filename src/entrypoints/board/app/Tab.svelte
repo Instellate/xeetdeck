@@ -24,7 +24,7 @@
   const settingsDisplay: Record<keyof TabSettings, string> = {
     hideRetweets: 'Hide Retweets',
     hideQuoteTweets: 'Hide Quote Tweets',
-    hideReplies: 'Hide replies',
+    hideReplies: 'Hide Replies',
   };
 </script>
 
@@ -93,7 +93,7 @@
 {#snippet settings()}
   <DropdownMenu.Root>
     <DropdownMenu.Trigger class="cursor-pointer" data-bar-btn>
-      <button>
+      <button class="cursor-pointer transition-colors delay-75">
         <MoreVert class="hover:bg-background-hover w-6 rounded-full fill-white" />
       </button>
     </DropdownMenu.Trigger>
@@ -114,14 +114,18 @@
   </DropdownMenu.Root>
 {/snippet}
 
-<div class="flex h-full flex-col p-2">
+<div class="flex h-full flex-col p-2 select-none">
   <div
     class="flex w-[500px] cursor-move items-center justify-between rounded-t-md border-b border-[#2f3336] bg-black px-2 py-2"
   >
     <span class="ml-1 select-none">{page.name}</span>
-    <div class="flex gap-2">
+    <div class="flex items-center gap-2">
       {@render settings()}
-      <button onclick={() => onClose?.()} data-bar-btn>
+      <button
+        onclick={() => onClose?.()}
+        data-bar-btn
+        class="cursor-pointer transition-colors delay-75"
+      >
         <Close
           class="hover:bg-background-hover w-6 cursor-pointer rounded-full fill-white"
         />
