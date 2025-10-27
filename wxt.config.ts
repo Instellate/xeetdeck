@@ -6,8 +6,13 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   srcDir: 'src',
-  modules: ['@wxt-dev/module-svelte', '@wxt-dev/webextension-polyfill'],
+  modules: [
+    '@wxt-dev/module-svelte',
+    '@wxt-dev/webextension-polyfill',
+    '@wxt-dev/auto-icons',
+  ],
   manifest: {
+    name: 'XeetDeck',
     permissions: ['storage', 'tabs', 'declarativeNetRequest', 'cookies', 'browsingData'],
     host_permissions: [
       '*://*.twitter.com/*',
@@ -24,4 +29,8 @@ export default defineConfig({
   vite: () => ({
     plugins: [nodePolyfills({ globals: { Buffer: true } }), tailwindcss()],
   }),
+  autoIcons: {
+    baseIconPath: 'assets/icon.svg',
+    developmentIndicator: false,
+  },
 });
