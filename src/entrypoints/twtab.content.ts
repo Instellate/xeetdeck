@@ -10,6 +10,12 @@ let pendingHomeType: HomeType | undefined;
 // Removing breaks the site
 // Instead change the display to none.
 
+const settingFunctions: Record<keyof TabSettings, (unhide?: boolean) => void> = {
+  hideRetweets,
+  hideQuoteTweets,
+  hideReplies,
+};
+
 function bodyMutation(_records: MutationRecord[], _observer: MutationObserver) {
   const mainContent = document.querySelector('main>div>div>div>div>div');
   if (
@@ -45,12 +51,11 @@ function bodyMutation(_records: MutationRecord[], _observer: MutationObserver) {
       listHeader.style.display = 'none';
     }
 
-    if (settings.hideRetweets) {
-      hideRetweets();
-    }
-
-    if (settings.hideReplies) {
-      hideReplies();
+    const settingsKeys = Object.keys(settings) as (keyof TabSettings)[];
+    for (const settingsKey of settingsKeys) {
+      if (settings[settingsKey]) {
+        settingFunctions[settingsKey]();
+      }
     }
   }
 }
@@ -123,9 +128,12 @@ export default defineContentScript({
           settings = e.data.settings;
 
           if (window.location.href === baseUrl || baseUrl === 'https://x.com/explore') {
-            hideRetweets(!settings.hideRetweets);
-            hideReplies(!settings.hideReplies);
-            hideQuoteTweets(!settings.hideQuoteTweets);
+            const settingsKeys = Object.keys(settings) as (keyof TabSettings)[];
+            for (const settingsKey of settingsKeys) {
+              if (settings[settingsKey]) {
+                settingFunctions[settingsKey](!settings[settingsKey]);
+              }
+            }
           }
 
           break;
