@@ -4,6 +4,7 @@
     name: string;
     url: string;
     settings: TabSettings;
+    order: number;
     homeType?: HomeType;
   };
 

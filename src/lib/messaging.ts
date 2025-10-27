@@ -3,8 +3,9 @@ import { defineExtensionMessaging } from '@webext-core/messaging';
 interface ProtocolMap {
   isBoard(): boolean;
   addBoard(): void;
-  openBoard(): void;
   removeBoard(): void;
+  openBoard(): void;
+  changeToBoard(): void;
 
   removeTwServiceWorker(): void;
 

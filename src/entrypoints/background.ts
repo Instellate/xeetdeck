@@ -54,11 +54,15 @@ export default defineBackground(() => {
     await updateRule(Array.from(boardTabs));
   });
 
-  onMessage('openBoard', () => {
-    browser.tabs.create({
+  onMessage('openBoard', async () => {
+    await browser.tabs.create({
       url: '/board.html',
       active: false,
     });
+  });
+
+  onMessage('changeToBoard', async (m) => {
+    browser.tabs.update(m.sender.tab.id, { url: browser.runtime.getURL('/board.html') });
   });
 
   onMessage('getTwitterCookies', async (m) => {

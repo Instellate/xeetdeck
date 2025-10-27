@@ -23,8 +23,9 @@ function mountUi(container: HTMLElement) {
     if (e.ctrlKey) {
       sendMessage('openBoard');
     } else {
-      window.location.href = browser.runtime.getURL('/board.html');
+      sendMessage('changeToBoard')
     }
+    e.preventDefault();
   });
 
   anchor.addEventListener('mouseover', () => {
@@ -65,7 +66,8 @@ export default defineContentScript({
 
     const ui = createIntegratedUi(ctx, {
       position: 'inline',
-      anchor: 'div[data-testid="Dropdown"]>div:has(a[data-testid="settings"]):has(:nth-last-child(6))',
+      anchor:
+        'div[data-testid="Dropdown"]>div:has(a[data-testid="settings"]):has(:nth-last-child(6))',
       onMount: mountUi,
     });
 

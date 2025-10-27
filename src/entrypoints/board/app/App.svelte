@@ -135,12 +135,24 @@
 
     const { draggedItem, targetContainer } = state;
 
-    const dragIndex = tabs.findIndex((t) => t.id === draggedItem.id);
-    const dropIndex = parseInt(targetContainer ?? '0');
+    const dropOrder = parseInt(targetContainer ?? '0');
+    const dragOrder = draggedItem.order;
 
-    if (dragIndex !== -1 && !isNaN(dropIndex)) {
-      const [item] = tabs.splice(dragIndex, 1);
-      tabs.splice(dropIndex, 0, item);
+    const dragIndex = tabs.findIndex((t) => t.id === draggedItem.id);
+    const dropIndex = tabs.findIndex((t) => t.order === dropOrder);
+
+    if (dragIndex !== -1 && dropIndex !== -1) {
+      if (dragOrder > dropOrder) {
+        for (let i = dropOrder; i < dragOrder; i++) {
+          tabs[tabs.findIndex((t) => t.order === i)].order++;
+        }
+      } else {
+        for (let i = dropOrder; i > dragOrder; i--) {
+          tabs[tabs.findIndex((t) => t.order === i)].order--;
+        }
+      }
+
+      tabs[dragIndex].order = dropOrder;
     }
   }
 </script>
@@ -196,6 +208,7 @@
                     url: `https://x.com/i/lists/${list.id}`,
                     name: list.name,
                     settings: defaultSettings,
+                    order: tabs!.length,
                   })}
               >
                 <div
@@ -220,6 +233,7 @@
             url: 'https://x.com/home',
             name: 'For you',
             settings: defaultSettings,
+            order: tabs!.length,
             homeType: 'forYou',
           })}
 
@@ -228,6 +242,7 @@
             url: 'https://x.com/home',
             name: 'Following',
             settings: defaultSettings,
+            order: tabs!.length,
             homeType: 'following',
           })}
 
@@ -236,6 +251,7 @@
             url: 'https://x.com/explore',
             name: 'Search',
             settings: defaultSettings,
+            order: tabs!.length,
           })}
         </DropdownMenu.Group>
         <DropdownMenu.Group></DropdownMenu.Group>
@@ -249,17 +265,18 @@
     {#each tabs as pageTab, i (pageTab.id)}
       <div
         use:draggable={{
-          container: i.toString(),
+          container: pageTab.order.toString(),
           dragData: pageTab,
           interactive: ['[data-bar-btn]'],
         }}
         use:droppable={{
-          container: i.toString(),
+          container: pageTab.order.toString(),
           callbacks: { onDrop: handleDrop },
         }}
         animate:flip={{ duration: 150 }}
         in:fade={{ duration: 150 }}
         out:fade={{ duration: 150 }}
+        style="order: {pageTab.order}"
       >
         <Tab
           bind:page={tabs[i]}

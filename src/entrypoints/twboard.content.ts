@@ -37,7 +37,7 @@ function bodyMutation(_records: MutationRecord[], _observer: MutationObserver) {
   ) as HTMLButtonElement | null;
   declineCookies?.click();
 
-  if (window.location.href === baseUrl) {
+  if (window.location.href === baseUrl || baseUrl === 'https://x.com/explore') {
     const listHeader = document.querySelector(
       'div[aria-label="Timeline: List"]>div>div',
     ) as HTMLDivElement | null;
@@ -55,26 +55,26 @@ function bodyMutation(_records: MutationRecord[], _observer: MutationObserver) {
   }
 }
 
-function hideRetweets() {
+function hideRetweets(unhide = false) {
   document
     .querySelectorAll(
       'div:has(>div>div>article[data-testid="tweet"]>div>div>div>div>div>div>div>div>svg)',
     )
-    .forEach((r) => ((r as HTMLElement).style.display = 'none'));
+    .forEach((r) => ((r as HTMLElement).style.display = unhide ? '' : 'none'));
 }
 
-function hideReplies() {
+function hideReplies(unhide = false) {
   const replies = document.querySelectorAll(
     'div:has(>div>div>article[data-testid="tweet"]>div:nth-child(1)>div:nth-child(1)>div:nth-child(1)>div:nth-child(1)>div:nth-child(2))',
   );
 
   for (const reply of replies) {
     const replyEl = reply as HTMLElement;
-    replyEl.style.display = 'none';
+    replyEl.style.display = unhide ? '' : 'none';
 
     const sibling = replyEl.previousElementSibling as HTMLElement | null;
     if (sibling) {
-      sibling.style.display = 'none';
+      sibling.style.display = unhide ? '' : 'none';
     }
   }
 }
@@ -114,13 +114,11 @@ export default defineContentScript({
         case 'settingsUpdated':
           settings = e.data.settings;
 
-          if (settings.hideRetweets) {
-            hideRetweets();
+          if (window.location.href === baseUrl || baseUrl === 'https://x.com/explore') {
+            hideRetweets(!settings.hideRetweets);
+            hideReplies(!settings.hideReplies);
           }
 
-          if (settings.hideReplies) {
-            hideReplies();
-          }
           break;
         case 'gotoHome':
           pendingHomeType = e.data.home;
