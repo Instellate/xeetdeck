@@ -12,12 +12,14 @@
     hideRetweets: boolean;
     hideQuoteTweets: boolean;
     hideReplies: boolean;
+    showMediaOnly: boolean;
   };
 
   export const defaultSettings: TabSettings = {
     hideRetweets: false,
     hideQuoteTweets: false,
     hideReplies: false,
+    showMediaOnly: false,
   };
 
   const settingsKeys = Object.keys(defaultSettings) as (keyof TabSettings)[];
@@ -25,6 +27,7 @@
     hideRetweets: 'Hide Retweets',
     hideQuoteTweets: 'Hide Quote Tweets',
     hideReplies: 'Hide Replies',
+    showMediaOnly: 'Tweets must contain media',
   };
 </script>
 
@@ -83,6 +86,14 @@
   });
 
   $effect(() => {
+    for (const setting of Object.keys(defaultSettings) as (keyof TabSettings)[]) {
+      if (page.settings[setting] === undefined) {
+        page.settings[setting] = defaultSettings[setting];
+      }
+    }
+  });
+
+  $effect(() => {
     sendTabMessage(iframe?.contentWindow, {
       type: 'settingsUpdated',
       settings: $state.snapshot(page.settings),
@@ -92,10 +103,11 @@
 
 {#snippet settings()}
   <DropdownMenu.Root>
-    <DropdownMenu.Trigger class="cursor-pointer" data-bar-btn>
-      <button class="cursor-pointer transition-colors delay-75">
-        <MoreVert class="hover:bg-background-hover w-6 rounded-full fill-white" />
-      </button>
+    <DropdownMenu.Trigger
+      class="flex cursor-pointer items-center justify-center transition-colors delay-75"
+      data-bar-btn
+    >
+      <MoreVert class="hover:bg-background-hover w-6 rounded-full fill-white" />
     </DropdownMenu.Trigger>
     <DropdownMenu.Portal>
       <DropdownMenu.Content
@@ -124,7 +136,7 @@
       <button
         onclick={() => onClose?.()}
         data-bar-btn
-        class="cursor-pointer transition-colors delay-75"
+        class="flex cursor-pointer items-center justify-center transition-colors delay-75"
       >
         <Close
           class="hover:bg-background-hover w-6 cursor-pointer rounded-full fill-white"

@@ -1,4 +1,4 @@
-import { sendTabMessage, type TabEventData, HomeType } from '@/lib';
+import { sendTabMessage, type TabEventData, HomeType, debug } from '@/lib';
 import { sendMessage } from '@/lib/messaging';
 import { defaultSettings, type TabSettings } from './board/app/Tab.svelte';
 
@@ -14,6 +14,7 @@ const settingFunctions: Record<keyof TabSettings, (unhide?: boolean) => void> = 
   hideRetweets,
   hideQuoteTweets,
   hideReplies,
+  showMediaOnly,
 };
 
 function bodyMutation(_records: MutationRecord[], _observer: MutationObserver) {
@@ -92,6 +93,23 @@ function hideQuoteTweets(unhide = false) {
     .forEach((q) => ((q as HTMLDivElement).style.display = unhide ? '' : 'none'));
 }
 
+function showMediaOnly(unhide = false) {
+  const tweets = document.querySelectorAll(
+    'div:has(>div>div>article[data-testid="tweet"])',
+  );
+
+  for (const tweet of tweets) {
+    const content = tweet.querySelector(
+      'div>div>article[data-testid="tweet"]>div>div>div:nth-child(2)>div:nth-child(2)>div:nth-child(3)',
+    ) as HTMLDivElement | null;
+
+    if (content && content.querySelector('img') === null) {
+      console.log(unhide);
+      (tweet as HTMLDivElement).style.display = unhide ? '' : 'none';
+    }
+  }
+}
+
 function gotoHome(type: HomeType): boolean {
   const tab = document.querySelector(
     'div[role="tablist"]:has(>div[role="presentation"]>a[href="/home"])',
@@ -117,6 +135,7 @@ export default defineContentScript({
   allFrames: true,
   async main(_ctx) {
     if (!(await sendMessage('isBoard'))) {
+      debug('Page is not a board. Exiting');
       return;
     }
 
@@ -130,9 +149,7 @@ export default defineContentScript({
           if (window.location.href === baseUrl || baseUrl === 'https://x.com/explore') {
             const settingsKeys = Object.keys(settings) as (keyof TabSettings)[];
             for (const settingsKey of settingsKeys) {
-              if (settings[settingsKey]) {
-                settingFunctions[settingsKey](!settings[settingsKey]);
-              }
+              settingFunctions[settingsKey](!settings[settingsKey]);
             }
           }
 
@@ -148,6 +165,6 @@ export default defineContentScript({
     sendTabMessage(window.top, { type: 'requestSettings' });
 
     const bodyObserver = new window.MutationObserver(bodyMutation);
-    bodyObserver.observe(document.body, { childList: true, subtree: true });
+    bodyObserver.observe(document.documentElement, { childList: true, subtree: true });
   },
 });

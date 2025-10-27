@@ -1,12 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import 'tailwindcss';
-
-@source inline('z-20');
-@source inline('z-10');
-@source inline('z-0');
 
 @theme {
   --color-background: var(--bg-color);
   --color-background-hover: var(--bg-hover-color);
+}
+
+.noto-sans {
+  font-family: 'Noto Sans', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: 'wdth' 100;
 }
 
 :root {
@@ -18,4 +23,9 @@ html,
 body {
   background-color: var(--bg-color);
   color: white;
+  font-family: 'Noto Sans', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: 'wdth' 100;
 }
