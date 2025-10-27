@@ -79,6 +79,14 @@ function hideReplies(unhide = false) {
   }
 }
 
+function hideQuoteTweets(unhide = false) {
+  document
+    .querySelectorAll(
+      'div:has(>div>div>article[data-testid="tweet"]>div>div>div:nth-child(2)>div:nth-child(2)>div:nth-child(3)>div:nth-child(2))',
+    )
+    .forEach((q) => ((q as HTMLDivElement).style.display = unhide ? '' : 'none'));
+}
+
 function gotoHome(type: HomeType): boolean {
   const tab = document.querySelector(
     'div[role="tablist"]:has(>div[role="presentation"]>a[href="/home"])',
@@ -117,6 +125,7 @@ export default defineContentScript({
           if (window.location.href === baseUrl || baseUrl === 'https://x.com/explore') {
             hideRetweets(!settings.hideRetweets);
             hideReplies(!settings.hideReplies);
+            hideQuoteTweets(!settings.hideQuoteTweets);
           }
 
           break;
