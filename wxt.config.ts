@@ -8,19 +8,18 @@ export default defineConfig({
   srcDir: 'src',
   modules: ['@wxt-dev/module-svelte', '@wxt-dev/webextension-polyfill'],
   manifest: {
-    permissions: [
-      'storage',
-      'tabs',
-      'declarativeNetRequest',
-      'declarativeNetRequestWithHostAccess',
-      'cookies',
-    ],
+    permissions: ['storage', 'tabs', 'declarativeNetRequest', 'cookies', 'browsingData'],
     host_permissions: [
-      'https://twitter.com/*',
-      'https://x.com/*',
+      '*://*.twitter.com/*',
+      '*://*.x.com/*',
       'https://raw.githubusercontent.com/*',
     ],
     description: 'A self made implementation of tweetdeck',
+    browser_specific_settings: {
+      gecko: {
+        id: 'twboarder@instellate.xyz',
+      },
+    },
   },
   vite: () => ({
     plugins: [nodePolyfills({ globals: { Buffer: true } }), tailwindcss()],

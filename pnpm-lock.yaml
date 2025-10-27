@@ -11,6 +11,9 @@ importers:
 
   .:
     dependencies:
+      '@thisux/sveltednd':
+        specifier: ^0.0.20
+        version: 0.0.20(svelte@5.41.3)
       '@webext-core/messaging':
         specifier: ^2.3.0
         version: 2.3.0
@@ -42,6 +45,9 @@ importers:
       '@tsconfig/svelte':
         specifier: ^5.0.5
         version: 5.0.5
+      '@types/lodash.debounce':
+        specifier: ^4.0.9
+        version: 4.0.9
       '@wxt-dev/module-svelte':
         specifier: ^2.0.3
         version: 2.0.4(svelte@5.41.3)(vite@7.1.12(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2))(wxt@0.20.11(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.52.5))
@@ -590,6 +596,31 @@ packages:
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7
 
+  '@thisux/sveltednd@0.0.12':
+    resolution: {integrity: sha512-9edVcakYkoCzU6pNIwmJ6Cf+9anECod26Ue/rL3Ssf5LyuLaBLXtBx4H4U8YwQCkwtMeSGFf0OsiMpPpFjvCcg==}
+    peerDependencies:
+      svelte: ^5.0.0
+
+  '@thisux/sveltednd@0.0.14':
+    resolution: {integrity: sha512-Vbq69SU3HUomPg6oCXtb89OG89hka0YIkdaErYibn3waK7tYE66IcQxD/Fzg8YNW3EVsXoA9kc7kW5EUBCSQGg==}
+    peerDependencies:
+      svelte: ^5.0.0
+
+  '@thisux/sveltednd@0.0.17':
+    resolution: {integrity: sha512-lRninjw439phhA8xAHqCpMAX0hnwFMdbXW4M0XJgAdnGxeum+QsLiIC4P3HnkNXAygsVKUqxRcbS84CxDZ9hPw==}
+    peerDependencies:
+      svelte: ^5.0.0
+
+  '@thisux/sveltednd@0.0.18':
+    resolution: {integrity: sha512-MO+iR9ZRHApvtwgWujmqwUbhv9mKs0jLOmeG4tn98GmU1/9wVOi02jrNqeggKg3c8dXz6pMmUHfOfmcq7WwYZg==}
+    peerDependencies:
+      svelte: ^5.0.0
+
+  '@thisux/sveltednd@0.0.20':
+    resolution: {integrity: sha512-VE0HopIlHIvNOfSZ1SsiIzl1AmTU0VSd2Nz2Q2nIdqIUsT/UP4hiLw2ed2jFqTKTbqC+kbCYL9vuBpkYnEw+Kw==}
+    peerDependencies:
+      svelte: ^5.0.0
+
   '@tsconfig/svelte@5.0.5':
     resolution: {integrity: sha512-48fAnUjKye38FvMiNOj0J9I/4XlQQiZlpe9xaNPfe8vy2Y1hFBt8g1yqf2EGjVvHavo4jf2lC+TQyENCr4BJBQ==}
 
@@ -604,6 +635,12 @@ packages:
 
   '@types/har-format@1.2.16':
     resolution: {integrity: sha512-fluxdy7ryD3MV6h8pTfTYpy/xQzCFC7m89nOH9y94cNqJ1mDIDPut7MnRHI3F6qRmh/cT2fUjG1MLdCNb4hE9A==}
+
+  '@types/lodash.debounce@4.0.9':
+    resolution: {integrity: sha512-Ma5JcgTREwpLRwMM+XwBR7DaWe96nC38uCBDFKZWbNKD+osjVzdpnUSwBcqCptrp16sSOLBAUb50Car5I0TCsQ==}
+
+  '@types/lodash@4.17.20':
+    resolution: {integrity: sha512-H3MHACvFUEiujabxhaI/ImO6gUrd8oOurg7LQtS7mbwIXA/cUqWrvBsaeJ23aZEPk1TAYkurjfMbSELfoCXlGA==}
 
   '@types/minimatch@3.0.5':
     resolution: {integrity: sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==}
@@ -3076,6 +3113,30 @@ snapshots:
       tailwindcss: 4.1.16
       vite: 7.1.12(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)
 
+  '@thisux/sveltednd@0.0.12(svelte@5.41.3)':
+    dependencies:
+      svelte: 5.41.3
+
+  '@thisux/sveltednd@0.0.14(svelte@5.41.3)':
+    dependencies:
+      '@thisux/sveltednd': 0.0.12(svelte@5.41.3)
+      svelte: 5.41.3
+
+  '@thisux/sveltednd@0.0.17(svelte@5.41.3)':
+    dependencies:
+      '@thisux/sveltednd': 0.0.14(svelte@5.41.3)
+      svelte: 5.41.3
+
+  '@thisux/sveltednd@0.0.18(svelte@5.41.3)':
+    dependencies:
+      '@thisux/sveltednd': 0.0.17(svelte@5.41.3)
+      svelte: 5.41.3
+
+  '@thisux/sveltednd@0.0.20(svelte@5.41.3)':
+    dependencies:
+      '@thisux/sveltednd': 0.0.18(svelte@5.41.3)
+      svelte: 5.41.3
+
   '@tsconfig/svelte@5.0.5': {}
 
   '@types/estree@1.0.8': {}
@@ -3087,6 +3148,12 @@ snapshots:
   '@types/filewriter@0.0.33': {}
 
   '@types/har-format@1.2.16': {}
+
+  '@types/lodash.debounce@4.0.9':
+    dependencies:
+      '@types/lodash': 4.17.20
+
+  '@types/lodash@4.17.20': {}
 
   '@types/minimatch@3.0.5': {}
 

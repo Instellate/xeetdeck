@@ -13,14 +13,15 @@ async function updateRule(tabIds: number[]) {
           id: 1,
           priority: 1,
           condition: {
-            requestDomains: ['twitter.com', 'x.com'],
+            requestDomains: ['x.com', 'twitter.com'],
+            resourceTypes: ['main_frame', 'sub_frame'],
             tabIds,
           },
           action: {
             type: 'modifyHeaders',
             responseHeaders: [
               {
-                header: 'x-frame-options',
+                header: 'X-Frame-Options',
                 operation: 'remove',
               },
             ],
@@ -40,9 +41,10 @@ export default defineBackground(() => {
     boardTabs.add(m.sender.tab.id);
     await updateRule(Array.from(boardTabs));
 
-    browser.tabs.onRemoved.addListener((e) => {
+    browser.tabs.onRemoved.addListener(async (e) => {
       if (e === m.sender.tab.id) {
         boardTabs.delete(m.sender.tab.id);
+        await updateRule(Array.from(boardTabs));
       }
     });
   });
@@ -84,6 +86,19 @@ export default defineBackground(() => {
     }
 
     return cookiesRecord;
+  });
+
+  onMessage('removeTwServiceWorker', async () => {
+    if (import.meta.env.CHROME) {
+      await browser.browsingData.remove(
+        {
+          origins: ['https://twitter.com', 'https://x.com'],
+        },
+        {
+          serviceWorkers: true,
+        },
+      );
+    }
   });
 
   onMessage('debug', (e) => console.log(e.data));

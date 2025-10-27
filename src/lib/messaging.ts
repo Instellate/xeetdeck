@@ -1,10 +1,12 @@
-import { defineExtensionMessaging } from "@webext-core/messaging";
+import { defineExtensionMessaging } from '@webext-core/messaging';
 
 interface ProtocolMap {
   isBoard(): boolean;
   addBoard(): void;
   openBoard(): void;
   removeBoard(): void;
+
+  removeTwServiceWorker(): void;
 
   // Used for constructing Twitter API Client
   getTwitterCookies(): Record<string, string>;

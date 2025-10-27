@@ -17,6 +17,7 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.16",
     "@tsconfig/svelte": "^5.0.5",
+    "@types/lodash.debounce": "^4.0.9",
     "@wxt-dev/module-svelte": "^2.0.3",
     "@wxt-dev/webextension-polyfill": "^1.0.0",
     "prettier": "3.6.2",
@@ -40,6 +41,7 @@
   },
   "packageManager": "pnpm@10.19.0",
   "dependencies": {
+    "@thisux/sveltednd": "^0.0.20",
     "@webext-core/messaging": "^2.3.0",
     "bits-ui": "^2.14.1",
     "clsx": "^2.1.1",
