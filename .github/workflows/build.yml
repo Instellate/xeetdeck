@@ -36,10 +36,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: xeetdeck-${{ env.PKG_VERSION }}-chrome
-          path: .output/xeetdeck-${{ env.PKG_VERSION }}-chrome
+          path: .output/chrome-mv3
+          if-no-files-found: fail
+
 
       - name: Upload Firefox Extension
         uses: actions/upload-artifact@v4
         with:
           name: xeetdeck-${{ env.PKG_VERSION }}-firefox
-          path: .output/xeetdeck-${{ env.PKG_VERSION }}-firefox
+          path: .output/firefox-mv2
+          if-no-files-found: fail
