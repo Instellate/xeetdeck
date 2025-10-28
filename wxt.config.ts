@@ -33,4 +33,9 @@ export default defineConfig({
     baseIconPath: 'assets/icon.svg',
     developmentIndicator: false,
   },
+  imports: {
+    eslintrc: {
+      enabled: 9,
+    },
+  },
 });

@@ -10,13 +10,13 @@ function mountUi(container: HTMLElement) {
   anchor.href = browser.runtime.getURL('/board.html');
   anchor.setAttribute('data-testid', 'xeetdeck');
 
-  const svg = anchor.firstElementChild?.firstElementChild!;
-  svg.innerHTML =
+  const svg = anchor.firstElementChild?.firstElementChild;
+  svg!.innerHTML =
     '<g><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H600v-80h160v-480H200v480h160v80H200Zm240 0v-246l-64 64-56-58 160-160 160 160-56 58-64-64v246h-80Z"/></g>';
-  svg.setAttribute('viewBox', '0 -960 960 960');
+  svg?.setAttribute('viewBox', '0 -960 960 960');
 
   const text = anchor.firstElementChild?.children.item(1)
-    ?.firstElementChild! as HTMLSpanElement;
+    ?.firstElementChild as HTMLSpanElement;
   text.innerText = 'Open XeetDeck';
 
   menuOption.addEventListener('click', (e) => {

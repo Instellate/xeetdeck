@@ -44,6 +44,8 @@
     onClose?: () => void;
   };
 
+  // They are not unused just used elsewhere
+  // eslint-disable-next-line svelte/no-unused-props
   let { page = $bindable(), onClose }: Props = $props();
   let iframe: HTMLIFrameElement | undefined = $state();
 
@@ -115,7 +117,7 @@
         align="end"
         sideOffset={8}
       >
-        {#each settingsKeys as key}
+        {#each settingsKeys as key (key)}
           <DropdownCheckbox
             bind:checked={page.settings[key]}
             text={settingsDisplay[key]}

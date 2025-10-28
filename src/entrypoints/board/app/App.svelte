@@ -8,6 +8,7 @@
   let twitterListApi: TwitterListAPI | undefined;
 
   type TwListFeed = {
+    id: string;
     name: string;
     lists: TwList[];
   };
@@ -88,6 +89,7 @@
         }
 
         listFeed.push({
+          id: entry.entryId,
           name: entry.content.header.text,
           lists: twLists,
         });
@@ -192,13 +194,13 @@
         sideOffset={8}
         class="bg-background mx-2 flex flex-col gap-2 rounded-md border border-white px-2 py-1 shadow"
       >
-        {#each feeds as feed}
+        {#each feeds as feed (feed.id)}
           <DropdownMenu.Group class="flex flex-col gap-2 py-2">
             <DropdownMenu.GroupHeading>
               <strong>{feed.name}</strong>
             </DropdownMenu.GroupHeading>
 
-            {#each feed.lists as list}
+            {#each feed.lists as list (list.id)}
               <DropdownMenu.Item
                 class="hover:bg-background-hover flex gap-2 rounded-md select-none"
                 onclick={() =>

@@ -1,0 +1,43 @@
+name: Build
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  build:
+    name: Build Extension
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm i --frozen-lockfile
+
+      - name: Store package version
+        run: echo "PKG_VERSION=$(node -p 'require("./package.json").version')" >> $GITHUB_ENV
+
+      - name: Build Chrome Extension
+        run: pnpm zip
+
+      - name: Build Firefox Extension
+        run: pnpm zip:firefox
+
+      - name: Upload Chrome Extension
+        uses: actions/upload-artifact@v4
+        with:
+          name: chrome
+          path: .output/xeetdeck-${PKG_VERSION}-chrome.zip
+
+      - name: Upload Firefox Extension
+        uses: actions/upload-artifact@v4
+        with:
+          name: firefox
+          path: .output/xeetdeck-${PKG_VERSION}-firefox.zip

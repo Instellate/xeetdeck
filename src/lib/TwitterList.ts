@@ -93,8 +93,8 @@ export type TwitterListTimelineModuleItemContent =
         user_results: {
           rest_id: string;
           core: {
-            name: String;
-            screen_name: String;
+            name: string;
+            screen_name: string;
           };
           avatar: {
             image_url: string;

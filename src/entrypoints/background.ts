@@ -65,7 +65,7 @@ export default defineBackground(() => {
     browser.tabs.update(m.sender.tab.id, { url: browser.runtime.getURL('/board.html') });
   });
 
-  onMessage('getTwitterCookies', async (m) => {
+  onMessage('getTwitterCookies', async () => {
     const cookies = await browser.cookies.getAll({ domain: 'x.com' });
     const cookiesRecord: Record<string, string> = {};
 
