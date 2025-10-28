@@ -33,11 +33,11 @@ jobs:
       - name: Upload Chrome Extension
         uses: actions/upload-artifact@v4
         with:
-          name: chrome
+          name: xeetdeck-${{ env.PKG_VERSION }}-chrome.zip
           path: .output/xeetdeck-${{ env.PKG_VERSION }}-chrome.zip
 
       - name: Upload Firefox Extension
         uses: actions/upload-artifact@v4
         with:
-          name: firefox
+          name: xeetdeck-${{ env.PKG_VERSION }}-firefox.zip
           path: .output/xeetdeck-${{ env.PKG_VERSION }}-firefox.zip
