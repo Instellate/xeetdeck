@@ -7,6 +7,8 @@ jobs:
   build:
     name: Build Extension
     runs-on: ubuntu-latest
+    env:
+      PKG_VERSION: ''
 
     steps:
       - uses: actions/checkout@v5
@@ -25,19 +27,19 @@ jobs:
         run: echo "PKG_VERSION=$(node -p 'require("./package.json").version')" >> $GITHUB_ENV
 
       - name: Build Chrome Extension
-        run: pnpm zip
+        run: pnpm build
 
       - name: Build Firefox Extension
-        run: pnpm zip:firefox
+        run: pnpm build:firefox
 
       - name: Upload Chrome Extension
         uses: actions/upload-artifact@v4
         with:
-          name: xeetdeck-${{ env.PKG_VERSION }}-chrome.zip
-          path: .output/xeetdeck-${{ env.PKG_VERSION }}-chrome.zip
+          name: xeetdeck-${{ env.PKG_VERSION }}-chrome
+          path: .output/xeetdeck-${{ env.PKG_VERSION }}-chrome
 
       - name: Upload Firefox Extension
         uses: actions/upload-artifact@v4
         with:
-          name: xeetdeck-${{ env.PKG_VERSION }}-firefox.zip
-          path: .output/xeetdeck-${{ env.PKG_VERSION }}-firefox.zip
+          name: xeetdeck-${{ env.PKG_VERSION }}-firefox
+          path: .output/xeetdeck-${{ env.PKG_VERSION }}-firefox
