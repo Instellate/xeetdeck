@@ -1,6 +1,7 @@
 import { defineConfig } from 'wxt';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import tailwindcss from '@tailwindcss/vite';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 // Node polyfills are needed to get `twitter-openapi-typescript` to work
 
@@ -26,8 +27,14 @@ export default defineConfig({
       },
     },
   },
+  svelte: {
+    vite: {
+      preprocess: [vitePreprocess()],
+    },
+  },
   vite: () => ({
     plugins: [nodePolyfills({ globals: { Buffer: true } }), tailwindcss()],
+
   }),
   autoIcons: {
     baseIconPath: 'assets/icon.svg',

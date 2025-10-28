@@ -1,4 +1,4 @@
-import { sendTabMessage, type TabEventData, HomeType, debug } from '@/lib';
+import { sendTabMessage, type TabEventData, type HomeType, debug } from '@/lib';
 import { sendMessage } from '@/lib/messaging';
 import { defaultSettings, type TabSettings } from './board/app/Tab.svelte';
 

@@ -23,7 +23,7 @@ function mountUi(container: HTMLElement) {
     if (e.ctrlKey) {
       sendMessage('openBoard');
     } else {
-      sendMessage('changeToBoard')
+      sendMessage('changeToBoard');
     }
     e.preventDefault();
   });

@@ -7,7 +7,6 @@ import { fileURLToPath } from 'node:url';
 import ts from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
 import autoImports from './.wxt/eslint-auto-imports.mjs';
-import svelteConfig from './svelte.config'
 
 const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
@@ -34,7 +33,6 @@ export default defineConfig(
         projectService: true,
         extraFileExtensions: ['.svelte'],
         parser: ts.parser,
-        svelteConfig
       },
     },
   },
