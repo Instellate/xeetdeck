@@ -37,7 +37,7 @@ jobs:
         with:
           name: xeetdeck-${{ env.PKG_VERSION }}-chrome
           path: .output/chrome-mv3/
-          if-no-files-found: fail
+          if-no-files-found: error
 
 
       - name: Upload Firefox Extension
@@ -45,4 +45,4 @@ jobs:
         with:
           name: xeetdeck-${{ env.PKG_VERSION }}-firefox
           path: .output/firefox-mv2/
-          if-no-files-found: fail
+          if-no-files-found: error
