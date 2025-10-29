@@ -15,6 +15,7 @@ const settingFunctions: Record<keyof TabSettings, (unhide?: boolean) => void> = 
   hideQuoteTweets,
   hideReplies,
   showMediaOnly,
+  showTextOnly,
 };
 
 function bodyMutation(_records: MutationRecord[], _observer: MutationObserver) {
@@ -94,6 +95,14 @@ function hideQuoteTweets(unhide = false) {
 }
 
 function showMediaOnly(unhide = false) {
+  toggleMedia('media', unhide);
+}
+
+function showTextOnly(unhide = false) {
+  toggleMedia('text', unhide);
+}
+
+function toggleMedia(type: 'text' | 'media', unhide = false) {
   const tweets = document.querySelectorAll(
     'div:has(>div>div>article[data-testid="tweet"])',
   );
@@ -103,7 +112,12 @@ function showMediaOnly(unhide = false) {
       'div>div>article[data-testid="tweet"]>div>div>div:nth-child(2)>div:nth-child(2)>div:nth-child(3)',
     ) as HTMLDivElement | null;
 
-    if (content && content.querySelector('img') === null) {
+    if (
+      content &&
+      (type === 'media'
+        ? content.querySelector('img, video') === null
+        : content.querySelector('img, video') !== null)
+    ) {
       console.log(unhide);
       (tweet as HTMLDivElement).style.display = unhide ? '' : 'none';
     }

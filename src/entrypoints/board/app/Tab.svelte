@@ -13,6 +13,7 @@
     hideQuoteTweets: boolean;
     hideReplies: boolean;
     showMediaOnly: boolean;
+    showTextOnly: boolean;
   };
 
   export const defaultSettings: TabSettings = {
@@ -20,6 +21,7 @@
     hideQuoteTweets: false,
     hideReplies: false,
     showMediaOnly: false,
+    showTextOnly: false,
   };
 
   const settingsKeys = Object.keys(defaultSettings) as (keyof TabSettings)[];
@@ -28,6 +30,7 @@
     hideQuoteTweets: 'Hide Quote Tweets',
     hideReplies: 'Hide Replies',
     showMediaOnly: 'Tweets must contain media',
+    showTextOnly: 'Tweets cannot contain media',
   };
 </script>
 

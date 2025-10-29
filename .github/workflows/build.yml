@@ -39,7 +39,6 @@ jobs:
           path: .output/chrome-mv3/
           if-no-files-found: error
 
-
       - name: Upload Firefox Extension
         uses: actions/upload-artifact@v4
         with:
