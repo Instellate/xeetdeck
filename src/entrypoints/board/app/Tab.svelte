@@ -37,8 +37,8 @@
 <script lang="ts">
   import { sendTabMessage, type HomeType, type TabEventData } from '@/lib';
   import { DropdownMenu } from 'bits-ui';
-  import Close from '@/lib/components/icons/Close.svelte';
-  import MoreVert from '@/lib/components/icons/MoreVert.svelte';
+  import Close from '@material-symbols/svg-400/outlined/close.svg?component';
+  import MoreVert from '@material-symbols/svg-400/outlined/more_vert.svg?component';
   import DropdownCheckbox from './DropdownCheckbox.svelte';
   import { sendMessage } from '@/lib/messaging';
 
@@ -112,7 +112,7 @@
       class="flex cursor-pointer items-center justify-center transition-colors delay-75"
       data-bar-btn
     >
-      <MoreVert class="hover:bg-background-hover w-6 rounded-full fill-white" />
+      <MoreVert class="hover:bg-background-hover h-6 w-6 rounded-full fill-white" />
     </DropdownMenu.Trigger>
     <DropdownMenu.Portal>
       <DropdownMenu.Content
@@ -144,7 +144,7 @@
         class="flex cursor-pointer items-center justify-center transition-colors delay-75"
       >
         <Close
-          class="hover:bg-background-hover w-6 cursor-pointer rounded-full fill-white"
+          class="hover:bg-background-hover h-6 w-6 cursor-pointer rounded-full fill-white"
         />
       </button>
     </div>

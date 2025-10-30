@@ -1,6 +1,7 @@
 <script lang="ts">
-  import CheckboxOutline from '@/lib/components/icons/ChecboxOutline.svelte';
-  import Checkbox from '@/lib/components/icons/Checkbox.svelte';
+  import CheckboxBlank from '@material-symbols/svg-400/outlined/check_box_outline_blank.svg?component';
+  import CheckboxIndeterminate from '@material-symbols/svg-400/outlined/indeterminate_check_box.svg?component';
+  import CheckboxSelected from '@material-symbols/svg-400/outlined/select_check_box.svg?component';
   import { DropdownMenu } from 'bits-ui';
   import type { Snippet } from 'svelte';
 
@@ -22,17 +23,21 @@
 <DropdownMenu.CheckboxItem
   bind:checked
   class="hover:bg-background-hover flex items-center gap-1 px-2 py-1 select-none"
-  closeOnSelect={closeOnSelect}
+  {closeOnSelect}
 >
-  {#snippet children({ checked })}
+  {#snippet children({ checked, indeterminate })}
     {#if checked}
-      <Checkbox class="h-4 w-4" />
+      <CheckboxSelected class="h-4 w-4 fill-white" />
+    {:else if indeterminate}
+      <CheckboxIndeterminate class="h-4 w-4 fill-white" />
     {:else}
-      <CheckboxOutline class="h-4 w-4" />
+      <CheckboxBlank class="h-4 w-4 fill-white" />
     {/if}
+
     {#if text}
       <span>{text}</span>
     {/if}
+
     {@render rootChildren?.()}
   {/snippet}
 </DropdownMenu.CheckboxItem>

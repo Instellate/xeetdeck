@@ -102,16 +102,19 @@
 
 <script lang="ts">
   import type { Component } from 'svelte';
+  import type { SVGAttributes } from 'svelte/elements';
   import { DropdownMenu } from 'bits-ui';
   import { savedTabs } from '@/lib';
   import Tab, { defaultSettings, type TabPage } from './Tab.svelte';
   import { type DragDropState, draggable, droppable } from '@thisux/sveltednd';
   import { flip } from 'svelte/animate';
   import { fade } from 'svelte/transition';
-  import Add from '@/lib/components/icons/Add.svelte';
-  import ForYou from '@/lib/components/icons/ForYou.svelte';
-  import Person from '@/lib/components/icons/PersonAdd.svelte';
-  import Search from '@/lib/components/icons/Search.svelte';
+  import Add from '@material-symbols/svg-400/outlined/add.svg?component';
+  import ForYou from '@material-symbols/svg-400/outlined/for_you.svg?component';
+  import Person from '@material-symbols/svg-400/outlined/person_add.svg?component';
+  import Search from '@material-symbols/svg-400/outlined/search.svg?component';
+
+  type IconComponent = Component<SVGAttributes<SVGSVGElement>>;
 
   let tabs: TabPage[] | undefined = $state();
 
@@ -159,7 +162,12 @@
   }
 </script>
 
-{#snippet staticOption(text: string, icon: Component, className: string, page: TabPage)}
+{#snippet staticOption(
+  text: string,
+  icon: IconComponent,
+  className: string,
+  page: TabPage,
+)}
   {@const Icon = icon}
   <DropdownMenu.Item
     class="hover:bg-background-hover flex gap-2 rounded-md select-none"
@@ -168,7 +176,7 @@
     <div
       class="flex h-12 w-12 items-center justify-center rounded-lg {className} bg-cover bg-center"
     >
-      <Icon class="h-6 w-6 opacity-70" />
+      <Icon class="h-6 w-6 fill-white opacity-70" />
     </div>
     <div class="flex flex-col justify-center">
       <strong>{text}</strong>
@@ -179,14 +187,14 @@
 {#await getLists()}
   <div class="absolute bottom-0 left-0 pb-2 pl-2">
     <button disabled>
-      <Add class="h-12 w-12" />
+      <Add class="h-12 w-12 fill-white opacity-75" />
     </button>
   </div>
 {:then feeds}
   <DropdownMenu.Root>
     <DropdownMenu.Trigger class="absolute bottom-0 left-0 pb-2 pl-2">
       <button class="hover:bg-background-hover rounded-md transition-colors delay-75">
-        <Add class="h-12 w-12" />
+        <Add class="h-12 w-12 fill-white" />
       </button>
     </DropdownMenu.Trigger>
     <DropdownMenu.Portal>
